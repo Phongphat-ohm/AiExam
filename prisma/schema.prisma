@@ -1,0 +1,152 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ผู้ใช้
+model User {
+  id         Int    @id @unique @default(autoincrement())
+  gravatar   String @default("/images/user.png")
+  first_name String
+  last_name  String
+  email      String @unique
+  username   String @unique
+  password   String
+  point      Float
+
+  grade_id Int
+  rank_id  Int
+
+  create_at DateTime @default(now())
+  update_at DateTime @updatedAt
+
+  Grade      Grade?       @relation(fields: [gradeId], references: [id])
+  gradeId    Int?
+  Rank       Rank?        @relation(fields: [rankId], references: [id])
+  rankId     Int?
+  ExamResult ExamResult[]
+}
+
+// ระดับชั้น
+model Grade {
+  id    Int    @id @unique @default(autoincrement())
+  grade String
+
+  create_at DateTime @default(now())
+  update_at DateTime @updatedAt
+
+  users User[]
+}
+
+// ระดับแข่งขัน
+model Rank {
+  id            Int    @id @unique @default(autoincrement())
+  rank          String
+  require_point Float
+
+  create_at DateTime @default(now())
+  update_at DateTime @updatedAt
+
+  users User[]
+}
+
+// ชุดข้อสอบ
+model ExamSet {
+  id          Int @id @unique @default(autoincrement())
+  grade_id    Int
+  subject_id  Int
+  exercise_id Int
+
+  create_at DateTime @default(now())
+  update_at DateTime @updatedAt
+
+  Subject Subject @relation(fields: [subject_id], references: [id])
+}
+
+// วิชา
+model Subject {
+  id   Int    @id @unique @default(autoincrement())
+  name String
+
+  create_at DateTime   @default(now())
+  update_at DateTime   @updatedAt
+  ExamSet   ExamSet[]
+  Exercise  Exercise[]
+}
+
+// หน่วยการเรียน
+model Exercise {
+  id         Int    @id @unique @default(autoincrement())
+  name       String
+  subject_id Int
+
+  create_at DateTime @default(now())
+  update_at DateTime @updatedAt
+
+  Subject Subject @relation(fields: [subject_id], references: [id])
+}
+
+model Exam {
+  id            Int     @id @unique @default(autoincrement())
+  exam_set_id   Int
+  data          String
+  question      String
+  choice_1      String
+  choice_2      String
+  choice_3      String
+  choice_4      String
+  choice_5      String?
+  answer_choice String // 0 - 4
+  exam_detail   Int
+
+  create_at          DateTime             @default(now())
+  update_at          DateTime             @updatedAt
+  ExamResult         ExamResult[]
+  ExamResultLinkExam ExamResultLinkExam[]
+}
+
+model ExamData {
+  id   Int    @id @unique @default(autoincrement())
+  type String // text image
+  data String
+}
+
+model ExamDetail {
+  id   Int    @id @unique @default(autoincrement())
+  type String // text image vdo (source)
+  data String
+}
+
+model ExamResult {
+  id           Int   @id @default(autoincrement())
+  user_id      Int
+  exam_id      Int
+  score_result Float
+  score_max    Float
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  User               User                 @relation(fields: [user_id], references: [id])
+  Exam               Exam                 @relation(fields: [exam_id], references: [id])
+  ExamResultLinkExam ExamResultLinkExam[]
+}
+
+model ExamResultLinkExam {
+  id             Int @id @default(autoincrement())
+  exam_result_id Int
+  exam_id        Int
+
+  ExamResult ExamResult @relation(fields: [exam_result_id], references: [id])
+  Exam       Exam       @relation(fields: [exam_id], references: [id])
+}
