@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Navbar() {
   return (
     <>
@@ -39,7 +41,7 @@ export default function Navbar() {
             <ul className="menu menu-horizontal px-1">
               <li><a>หน้าหลัก</a></li>
               <li><a>สมัครสมาชิก</a></li>
-              <li><a>เกี่ยวกับเรา</a></li>
+              <li><Link href={"/about"}>เกี่ยวกับเรา</Link></li>
               <li><a>ติดต่อเรา</a></li>
             </ul>
           </div>
