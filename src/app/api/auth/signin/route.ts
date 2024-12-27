@@ -62,6 +62,8 @@ export async function POST(req: Request) {
             role: get_user_data.role
         })
     } catch (error) {
+        console.log(error);
+
         return Response.json({
             status: 400,
             message: "เซิร์ฟเวอร์ error",

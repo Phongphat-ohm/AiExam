@@ -55,6 +55,8 @@ export async function GET(req: Request) {
         })
 
     } catch (error) {
+        console.log(error);
+
         return Response.json({
             status: 400,
             message: "เซิร์ฟเวอร์ error",

@@ -43,7 +43,7 @@ export default function SigninCard() {
             if (res) {
                 Swal.close();
 
-                if (res.status == 400) {
+                if (res.status !== 200) {
                     Swal.fire({
                         icon: "error",
                         title: "ผิดพลาด",
