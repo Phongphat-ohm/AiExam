@@ -58,7 +58,7 @@ export async function POST(req: Request) {
 
         return Response.json({
             status: 200,
-            message: "สำเร็จ",
+            message: "เข้าสู่ระบบสำเร็จ",
             role: get_user_data.role
         })
     } catch (error) {
