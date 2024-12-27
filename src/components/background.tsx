@@ -6,7 +6,7 @@ const Background: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       className="h-screen bg-cover bg-center flex items-center justify-center"
       style={{
         backgroundImage:
-          "url('https://vrthaimagazine.com.au/wp-content/uploads/2023/07/cover2-scaled.jpg')",
+          "url('/images/bg/libs.jpg')",
       }}
     >
       {children}

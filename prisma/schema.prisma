@@ -23,6 +23,7 @@ model User {
   username   String @unique
   password   String
   point      Float
+  role       String @default("user")
 
   grade_id Int
   rank_id  Int

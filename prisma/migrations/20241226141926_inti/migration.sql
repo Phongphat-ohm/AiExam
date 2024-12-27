@@ -8,6 +8,7 @@ CREATE TABLE "User" (
     "username" TEXT NOT NULL,
     "password" TEXT NOT NULL,
     "point" REAL NOT NULL,
+    "role" TEXT NOT NULL DEFAULT 'user',
     "grade_id" INTEGER NOT NULL,
     "rank_id" INTEGER NOT NULL,
     "create_at" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
