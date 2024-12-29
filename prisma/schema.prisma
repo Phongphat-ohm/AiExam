@@ -25,9 +25,6 @@ model User {
   point      Float
   role       String @default("user")
 
-  grade_id Int
-  rank_id  Int
-
   create_at DateTime @default(now())
   update_at DateTime @updatedAt
 
