@@ -21,15 +21,16 @@ export default function Navbar() {
               </svg>
             </div>
             <ul
+              data-theme="light"
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow text-black">
               <li><Link href={"/"}>หน้าหลัก</Link></li>
               <li><Link href={"/signup"}>สมัครสมาชิก</Link></li>
               <li><Link href={"/about"}>เกี่ยวกับเรา</Link></li>
               <li><Link href={"contact"}>ติดต่อเรา</Link></li>
             </ul>
           </div>
-          <a className="btn btn-ghost text-xl">E-Xammy</a>
+          <Link href={"/"} className="btn btn-ghost text-xl">E-Xammy</Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
