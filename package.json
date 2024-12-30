@@ -10,14 +10,15 @@
     "postinstall": "npx prisma generate"
   },
   "dependencies": {
-    "@nextui-org/react": "^2.6.8",
+    "@nextui-org/react": "^2.6.10",
     "@prisma/client": "^6.1.0",
     "@types/bcrypt": "^5.0.2",
     "@types/jsonwebtoken": "^9.0.7",
+    "apexcharts": "^4.3.0",
     "axios": "^1.7.9",
     "bcrypt": "^5.1.1",
     "chart.js": "^4.4.7",
-    "daisyui": "^4.12.22",
+    "daisyui": "^4.12.23",
     "framer-motion": "^11.15.0",
     "jsonwebtoken": "^9.0.2",
     "next": "15.1.1",
@@ -27,12 +28,12 @@
     "sweetalert2": "^11.15.3"
   },
   "devDependencies": {
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "postcss": "^8",
+    "@types/node": "^20.17.10",
+    "@types/react": "^19.0.2",
+    "@types/react-dom": "^19.0.2",
+    "postcss": "^8.4.49",
     "prisma": "6.0.1",
-    "tailwindcss": "^3.4.1",
-    "typescript": "^5"
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.7.2"
   }
 }

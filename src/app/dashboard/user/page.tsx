@@ -1,5 +1,5 @@
 import Layout from "@/components/Dashboard/Layout";
-import UserIndex from "@/components/user/index";
+import UserIndex from "@/components/Dashboard/user/index";
 
 export default function UserDashboard() {
     return (

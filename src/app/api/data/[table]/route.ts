@@ -9,12 +9,21 @@ export async function GET(req: Request) {
 
         switch (table) {
             case "grade":
-                const data = await prisma.grade.findMany({ select: { id: true, grade: true } });
+                const grade_data = await prisma.grade.findMany({ select: { id: true, grade: true } });
                 return Response.json({
                     status: 200,
                     message: "ดึงข้อมูลสำเร็จ",
-                    data
+                    data: grade_data
                 })
+            case "users":
+                const user_data = await prisma.user.findMany({ include: { Grade: true, Rank: true } });
+
+                return Response.json({
+                    status: 200,
+                    message: "ดึงข้อมูลสำเร็จ",
+                    data: user_data
+                })
+
             default:
                 return Response.json({
                     status: 400,
