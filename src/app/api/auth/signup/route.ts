@@ -14,6 +14,12 @@ export async function POST(req: Request) {
         const password = body.password;
         const grade = body.grade;
 
+        const url = req.url;
+        const search = new URL(url).searchParams;
+        const status = search.get("role");
+
+        console.log("URL:", url);
+
         if (!first_name || !last_name || !email || !username || !password || !grade) {
             return Response.json({
                 status: 400,
@@ -54,6 +60,34 @@ export async function POST(req: Request) {
             return Response.json({
                 status: 400,
                 message: "ไม่พบระดับชั้นนี้"
+            })
+        }
+
+        if (status == "admin") {
+            const create_user = await prisma.user.create({
+                data: {
+                    first_name,
+                    last_name,
+                    email,
+                    username,
+                    password: hash_password,
+                    gravatar: profile_url,
+                    point: 0,
+                    gradeId: get_grade_id.id,
+                    role: "admin"
+                }
+            });
+
+            if (!create_user) {
+                return Response.json({
+                    status: 400,
+                    message: "สมัครสมาชิกไม่สำเร็จ"
+                })
+            }
+
+            return Response.json({
+                status: 200,
+                message: "สมัครสมาชิกสำเร็จ",
             })
         }
 

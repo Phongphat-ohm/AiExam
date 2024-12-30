@@ -84,12 +84,13 @@ export default function UserTable() {
                 <TableColumn key="email">อีเมล</TableColumn>
                 <TableColumn key="username">ชื่อผู้ใช้</TableColumn>
                 <TableColumn key="password">รหัสผ่าน</TableColumn>
+                <TableColumn key="role">ฐานะ</TableColumn>
                 <TableColumn key="grade">ระดับชั้นเรียน</TableColumn>
                 <TableColumn key="point">คะแนน</TableColumn>
                 <TableColumn key="rank">แรงค์</TableColumn>
                 <TableColumn key="create_at">สร้างบัญชีเมื่อ</TableColumn>
                 <TableColumn key="update_at">แก้ไขล่าสุดเมื่อ</TableColumn>
-                <TableColumn key="action">#</TableColumn>
+                <TableColumn key="action">Action</TableColumn>
             </TableHeader>
             <TableBody items={items} isLoading={users.length == 0 ? true : false} loadingContent={<Spinner />}>
                 {users.map((val, key) => (
@@ -99,7 +100,8 @@ export default function UserTable() {
                         <TableCell>{val.last_name}</TableCell>
                         <TableCell>{val.email}</TableCell>
                         <TableCell>{val.username}</TableCell>
-                        <TableCell>*********</TableCell>
+                        <TableCell>********</TableCell>
+                        <TableCell>{val.role}</TableCell>
                         <TableCell>{val.Grade?.grade}</TableCell>
                         <TableCell>{val.point}</TableCell>
                         <TableCell>{val.Rank?.rank}</TableCell>
