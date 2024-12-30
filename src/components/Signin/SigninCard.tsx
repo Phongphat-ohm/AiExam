@@ -50,6 +50,7 @@ export default function SigninCard() {
                         text: res.message,
                         confirmButtonText: "ลองอีกครั้ง"
                     })
+                    return;
                 }
 
                 if (res.role == "admin") {
@@ -65,6 +66,7 @@ export default function SigninCard() {
                             router.push("/dashboard")
                         }
                     })
+                    return;
                 } else {
                     Swal.fire({
                         icon: "success",
@@ -78,6 +80,7 @@ export default function SigninCard() {
                             router.push("/home")
                         }
                     })
+                    return;
                 }
             }
         } catch (error) {
@@ -90,6 +93,7 @@ export default function SigninCard() {
             })
 
             console.log(error)
+            return;
         }
     }
 
