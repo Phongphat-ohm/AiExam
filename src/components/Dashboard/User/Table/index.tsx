@@ -202,10 +202,18 @@ export default function UserTable() {
 
     }
 
+    const reload_data = () => {
+        setUsers([]);
+        get_user();
+    }
+
     return (
         <div>
             <div className="mb-4 flex gap-2 items-center">
                 <Link href={"/dashboard/user/new"} className="btn btn-success font-normal text-white">สมัครสมาชิก</Link>
+                <button className="btn btn-primary" onClick={reload_data}>
+                    โหลดข้อมูลผู้ใช้อีกครั้ง
+                </button>
                 <input
                     type="text"
                     placeholder="ค้นหา..."
