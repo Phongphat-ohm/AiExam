@@ -9,6 +9,8 @@ export async function POST(req: Request) {
         const data = await req.json();
         const { id, first_name, last_name, email, username, password, grade, rank, role, point } = data;
 
+        console.log(data)
+
         if (!id || !first_name || !last_name || !email || !username || !grade || !rank || !role || !point) {
             return Response.json({
                 status: 400,

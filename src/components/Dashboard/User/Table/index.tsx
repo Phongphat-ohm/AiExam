@@ -266,7 +266,7 @@ export default function UserTable() {
                             <TableCell>{val.email}</TableCell>
                             <TableCell>{val.username}</TableCell>
                             <TableCell>********</TableCell>
-                            <TableCell>{val.role}</TableCell>
+                            <TableCell className="text-info">{val.role}</TableCell>
                             <TableCell>{val.Grade?.grade}</TableCell>
                             <TableCell>{val.point}</TableCell>
                             <TableCell>{val.Rank?.rank}</TableCell>
