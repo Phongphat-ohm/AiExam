@@ -107,7 +107,7 @@ export default function SigninCard() {
                         </h1>
                         <label className="mt-2">กรอกชื่อผู้ใช้และรหัสผ่านเพื่อเข้าสู่ระบบ</label>
                         <div className="mt-5">
-                            <Input type="text" label="ชื่อผู้ใช้" name="username" placeholder="กรอกชื่อผู้ใช้" labelPlacement="outside" size="lg" isRequired required />
+                            <Input type="text" label="ชื่อผู้ใช้" name="username" placeholder="กรอกชื่อผู้ใช้" labelPlacement="outside" size="lg" autoComplete="off" isRequired required />
                             <br />
                             <div className="flex flex-col">
                                 <Input type="password" label="รหัสผ่าน" name="password" placeholder="กรอกรหัสผ่าน" labelPlacement="outside" size="lg" isRequired required />

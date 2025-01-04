@@ -20,7 +20,7 @@ import Link from "next/link";
 export default function UserTable() {
     const [page, setPage] = useState(1);
     const [users, setUsers] = useState<User[]>([]);
-    const [filter, setFilter] = useState(""); // ตัวกรอง
+    const [filter, setFilter] = useState("");
     const rowsPerPage = 10;
 
     const pages = Math.ceil(users.length / rowsPerPage);
@@ -270,8 +270,8 @@ export default function UserTable() {
                             <TableCell>{val.Grade?.grade}</TableCell>
                             <TableCell>{val.point}</TableCell>
                             <TableCell>{val.Rank?.rank}</TableCell>
-                            <TableCell>{val.create_at}</TableCell>
-                            <TableCell>{val.update_at}</TableCell>
+                            <TableCell>{new Date(val.create_at).toLocaleString("th-TH", { year: "2-digit", month: "short", day: "2-digit", hour: "2-digit", minute: "2-digit", hour12: false }).replace(/,/g, "")}</TableCell>
+                            <TableCell>{new Date(val.update_at).toLocaleString("th-TH", { year: "2-digit", month: "short", day: "2-digit", hour: "2-digit", minute: "2-digit", hour12: false }).replace(/,/g, "")}</TableCell>
                             <TableCell>
                                 <div className="flex gap-2 items-center">
                                     <Link href={"/dashboard/user/update/" + val.id}>

@@ -107,8 +107,8 @@ export default function SignupCard() {
                                 <Input isRequired autoComplete="off" required placeholder="ชื่อผู้ใช้" size="lg" label="ชื่อผู้ใช้" labelPlacement="outside" name="username" />
                                 <Input isRequired autoComplete="off" required type="password" size="lg" placeholder="รหัสผ่าน" label="รหัสผ่าน" labelPlacement="outside" className="col-span-2" name="password" />
                                 <GradeSelected />
-                                <RadioGroup label="เลือกฐานะผู้ใช้" isRequired name="role" orientation="horizontal">
-                                    <Radio defaultChecked value="user">ผู้ใช้</Radio>
+                                <RadioGroup defaultValue={"user"} label="เลือกฐานะผู้ใช้" isRequired name="role" orientation="horizontal">
+                                    <Radio value="user">ผู้ใช้</Radio>
                                     <Radio value="admin">แอดมิน</Radio>
                                 </RadioGroup>
                             </div>

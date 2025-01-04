@@ -47,7 +47,7 @@ export async function POST(req: Request) {
             })
         }
 
-        const hash_password = await bcrypt.hash(password, 10);
+        const hash_password = await bcrypt.hash(password, 12);
         const hash_email = crypto.createHash("sha256").update(email).digest("hex");
         const profile_url = `https://gravatar.com/avatar/${hash_email}`;
         const get_grade_id = await prisma.grade.findFirst({
@@ -74,7 +74,8 @@ export async function POST(req: Request) {
                     gravatar: profile_url,
                     point: 0,
                     gradeId: get_grade_id.id,
-                    role: "admin"
+                    role: "admin",
+                    rankId: 1
                 }
             });
 
@@ -100,7 +101,8 @@ export async function POST(req: Request) {
                 password: hash_password,
                 gravatar: profile_url,
                 point: 0,
-                gradeId: get_grade_id.id
+                gradeId: get_grade_id.id,
+                rankId: 1
             }
         });
 
