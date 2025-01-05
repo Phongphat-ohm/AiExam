@@ -25,7 +25,7 @@ interface GradeProp {
 
 export default function App() {
     const [page, setPage] = React.useState(1);
-    const rowsPerPage = 4;
+    const rowsPerPage = 6;
     const [grades, setGrades] = useState<GradeProp[]>([]);
     const [searchQuery, setSearchQuery] = useState<string>('');
     const route = useRouter();
