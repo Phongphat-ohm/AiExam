@@ -18,6 +18,21 @@ export default function Sidebar() {
             icon: <FaUsers />
         },
         {
+            href: "/dashboard/grade",
+            name: "ระดับชั้น",
+            icon: <FaWaterLadder />
+        },
+        {
+            href: "/dashboard/subject",
+            name: "วิชา",
+            icon: <FaBook />
+        },
+        {
+            href: "/dashboard/subject/exercise",
+            name: "สาระการเรียนรู้",
+            icon: <FaBookOpen />
+        },
+        {
             href: "/dashboard/exam/set",
             name: "ชุดข้อสอบ",
             icon: <FaClipboard />
@@ -26,21 +41,6 @@ export default function Sidebar() {
             href: "/dashboard/exam",
             name: "ข้อสอบ",
             icon: <FaClipboardCheck />
-        },
-        {
-            href: "/dashboard/exam/grade",
-            name: "ระดับชั้น",
-            icon: <FaWaterLadder />
-        },
-        {
-            href: "/dashboard/exam/subject",
-            name: "วิชา",
-            icon: <FaBook />
-        },
-        {
-            href: "/dashboard/exam/exercise",
-            name: "สาระการเรียนรู้",
-            icon: <FaBookOpen />
         },
         {
             href: "/dashboard/rank",

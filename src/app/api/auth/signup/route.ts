@@ -14,6 +14,8 @@ export async function POST(req: Request) {
         const password = body.password;
         const grade = body.grade;
 
+        console.log(body)
+
         const url = req.url;
         const search = new URL(url).searchParams;
         const status = search.get("role");

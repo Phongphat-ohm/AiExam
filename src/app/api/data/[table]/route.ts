@@ -9,7 +9,7 @@ export async function GET(req: Request) {
 
         switch (table) {
             case "grade":
-                const grade_data = await prisma.grade.findMany({ select: { id: true, grade: true } });
+                const grade_data = await prisma.grade.findMany({ select: { id: true, grade: true }, orderBy: { id: "asc" } });
                 return Response.json({
                     status: 200,
                     message: "ดึงข้อมูลสำเร็จ",
@@ -30,6 +30,14 @@ export async function GET(req: Request) {
                     status: 200,
                     message: "ดึงข้อมูลสำเร็จ",
                     data: ranks_data
+                })
+            case "exam-set":
+                const exam_set = await prisma.examSet.findMany({ include: { Exercise: true, Grade: true, Subject: true } });
+
+                return Response.json({
+                    status: 200,
+                    message: "ดึงข้อมูลสำเร็จ",
+                    data: exam_set
                 })
             default:
                 return Response.json({

@@ -5,7 +5,7 @@ import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 
 interface Root {
-    children: React.ReactNode;
+    children?: React.ReactNode;
 }
 
 interface LoadingContextProps {

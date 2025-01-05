@@ -43,7 +43,8 @@ model Grade {
   create_at DateTime @default(now())
   update_at DateTime @updatedAt
 
-  users User[]
+  users   User[]
+  ExamSet ExamSet[]
 }
 
 // ระดับแข่งขัน
@@ -68,7 +69,10 @@ model ExamSet {
   create_at DateTime @default(now())
   update_at DateTime @updatedAt
 
-  Subject Subject @relation(fields: [subject_id], references: [id])
+  Subject  Subject  @relation(fields: [subject_id], references: [id])
+  Grade    Grade    @relation(fields: [grade_id], references: [id])
+  Exercise Exercise @relation(fields: [exercise_id], references: [id])
+  Exam     Exam[]
 }
 
 // วิชา
@@ -91,13 +95,14 @@ model Exercise {
   create_at DateTime @default(now())
   update_at DateTime @updatedAt
 
-  Subject Subject @relation(fields: [subject_id], references: [id])
+  Subject Subject   @relation(fields: [subject_id], references: [id])
+  ExamSet ExamSet[]
 }
 
 model Exam {
   id            Int     @id @unique @default(autoincrement())
   exam_set_id   Int
-  data          String
+  data          String?
   question      String
   choice_1      String
   choice_2      String
@@ -111,6 +116,7 @@ model Exam {
   update_at          DateTime             @updatedAt
   ExamResult         ExamResult[]
   ExamResultLinkExam ExamResultLinkExam[]
+  ExamSet            ExamSet              @relation(fields: [exam_set_id], references: [id])
 }
 
 model ExamData {
