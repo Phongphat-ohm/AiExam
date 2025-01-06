@@ -19,8 +19,10 @@ import { FaPencil, FaSpinner, FaTrash } from "react-icons/fa6";
 
 
 interface GradeProp {
-    id: number;
     grade: string;
+    id: number;
+    create_at: Date;
+    update_at: Date;
 }
 
 export default function App() {
@@ -33,7 +35,6 @@ export default function App() {
     const pages = Math.ceil(grades.length / rowsPerPage);
 
     const items = React.useMemo(() => {
-        // Filter the grades based on searchQuery before slicing for pagination
         const filteredGrades = grades.filter(grade =>
             grade.grade.toLowerCase().includes(searchQuery.toLowerCase())
         );
@@ -328,13 +329,17 @@ export default function App() {
                 <TableHeader>
                     <TableColumn>#</TableColumn>
                     <TableColumn>ชื่อระดับ</TableColumn>
+                    <TableColumn>สร้างเมื่อ</TableColumn>
+                    <TableColumn>แก้ไขล่าสุด</TableColumn>
                     <TableColumn>Action</TableColumn>
                 </TableHeader>
-                <TableBody items={items} loadingContent={<Spinner />} isLoading={grades.length === 0}>
+                <TableBody items={items} loadingContent={<Spinner />} isLoading={grades.length === 0} emptyContent={"ไม่พบข้อมูลที่ต้องการค้นหา"}>
                     {(item) => (
                         <TableRow key={item.id} className="hover:bg-gray-50">
                             <TableCell width={"5%"}>{item.id}</TableCell>
-                            <TableCell width={"70%"}>{item.grade}</TableCell>
+                            <TableCell width={"50%"}>{item.grade}</TableCell>
+                            <TableCell>{new Date(item.create_at).toLocaleString("th-TH", { year: "2-digit", month: "short", day: "2-digit", hour: "2-digit", minute: "2-digit", hour12: false }).replace(/,/g, "")} </TableCell>
+                            <TableCell>{new Date(item.update_at).toLocaleString("th-TH", { year: "2-digit", month: "short", day: "2-digit", hour: "2-digit", minute: "2-digit", hour12: false }).replace(/,/g, "")} </TableCell>
                             <TableCell className="flex gap-2">
                                 <form action={() => action("edit", item.id.toString())}>
                                     <Button type="submit" value={"edit"} isIconOnly color="warning" size="sm" name="action" id="action">

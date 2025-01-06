@@ -5,8 +5,10 @@ import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 
 interface GradeProps {
-    id?: number;
-    grade?: string;
+    grade: string;
+    id: number;
+    create_at: Date;
+    update_at: Date;
 }
 
 export default function GradeSelected() {
