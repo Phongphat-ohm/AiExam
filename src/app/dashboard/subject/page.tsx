@@ -5,7 +5,7 @@ export default function Page() {
     return (
         <Layout>
             <div className="pt-20 px-5">
-                <SubjectTbl />
+                <SubjectTbl/>
             </div>
         </Layout>
     )
