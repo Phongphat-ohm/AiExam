@@ -43,8 +43,9 @@ model Grade {
   create_at DateTime @default(now())
   update_at DateTime @updatedAt
 
-  users   User[]
-  ExamSet ExamSet[]
+  users    User[]
+  ExamSet  ExamSet[]
+  Exercise Exercise[]
 }
 
 // ระดับแข่งขัน
@@ -91,11 +92,13 @@ model Exercise {
   id         Int    @id @unique @default(autoincrement())
   name       String
   subject_id Int
+  grade_id   Int
 
   create_at DateTime @default(now())
   update_at DateTime @updatedAt
 
   Subject Subject   @relation(fields: [subject_id], references: [id])
+  Grade   Grade     @relation(fields: [grade_id], references: [id])
   ExamSet ExamSet[]
 }
 
