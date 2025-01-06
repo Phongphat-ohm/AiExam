@@ -169,7 +169,7 @@ export default function SubjectTbl() {
         <div>
             {/* ช่องกรอกคำค้นหา */}
             <div className="mb-4 flex gap-3 mt-5">
-                <button className="btn btn-warning tooltip tooltip-right" data-tip={"โหลดข้อมูลใหม่"} onClick={() => {
+                <button disabled={subjects.length === 0} className="btn btn-warning tooltip tooltip-right" data-tip={"โหลดข้อมูลใหม่"} onClick={() => {
                     setSubjects([]);
                     get_subjects();
                 }}>
