@@ -27,7 +27,7 @@ export default function Navbar() {
               <li><Link href={"/"}>หน้าหลัก</Link></li>
               <li><Link href={"/signup"}>สมัครสมาชิก</Link></li>
               <li><Link href={"/about"}>เกี่ยวกับเรา</Link></li>
-              <li><Link href={"contact"}>ติดต่อเรา</Link></li>
+              <li><Link href={"/about"}>ติดต่อเรา</Link></li>
             </ul>
           </div>
           <Link href={"/"} className="btn btn-ghost text-xl">E-Xammy</Link>
