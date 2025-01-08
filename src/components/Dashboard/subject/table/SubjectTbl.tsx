@@ -243,11 +243,11 @@ export default function SubjectTbl() {
                             </TableCell>
                             <TableCell>
                                 <div className="flex gap-3">
-                                    <form action="">
+                                    <Link href={"/dashboard/subject/" + item.id}>
                                         <Button type="submit" color="warning" size="sm" isIconOnly className="text-white">
                                             <FaPencil />
                                         </Button>
-                                    </form>
+                                    </Link>
                                     <form action={remove_subject}>
                                         <input type="hidden" name="id" id="id" value={item.id} />
                                         <Button type="submit" color="danger" size="sm" isIconOnly className="text-white">

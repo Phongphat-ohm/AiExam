@@ -74,23 +74,26 @@ export default function NewSubjectCard() {
 
     return (
         <>
-            <div className="card bg-white shadow">
-                <figure className="p-3 border-b">
-                    เพิ่มวิชา
-                </figure>
-                <div className="card-body">
-                    <form action={create_subject} className="grid grid-cols-12 gap-3">
-                        {/* <Input type="text" label="รหัสวิชา" labelPlacement="outside" placeholder="รหัสวิชา" value={"1"} disabled className="col-span-2" size="lg" /> */}
-                        <Input type="text" label="ชื่อวิชา" labelPlacement="outside" placeholder="ชื่อวิชา" className="col-span-8" size="lg" name="subject_name" autoComplete="off" />
-                        <div className="flex items-end">
-                            <Button type="submit" color="success" className="w-full text-white" size="lg">ยืนยัน</Button>
-                        </div>
-                        <div className="flex items-end">
-                            <Link href={"/dashboard/subject"}>
-                                <Button type="button" color="warning" className="w-full text-white" size="lg">ยกเลิก</Button>
-                            </Link>
-                        </div>
-                    </form>
+            <div className="flex h-96 items-center justify-center">
+
+                <div className="card w-1/2 bg-white shadow">
+                    <figure className="p-3 border-b">
+                        เพิ่มวิชา
+                    </figure>
+                    <div className="card-body">
+                        <form action={create_subject} className="flex gap-3">
+                            {/* <Input type="text" label="รหัสวิชา" labelPlacement="outside" placeholder="รหัสวิชา" value={"1"} disabled className="col-span-2" size="lg" /> */}
+                            <Input type="text" label="ชื่อวิชา" labelPlacement="outside" placeholder="ชื่อวิชา" className="col-span-9" size="lg" name="subject_name" autoComplete="off" />
+                            <div className="flex items-end">
+                                <Button type="submit" color="success" className="w-full text-white" size="lg">ยืนยัน</Button>
+                            </div>
+                            <div className="flex items-end">
+                                <Link href={"/dashboard/subject"}>
+                                    <Button type="button" color="warning" className="w-full text-white" size="lg">ยกเลิก</Button>
+                                </Link>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </>

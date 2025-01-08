@@ -5,13 +5,20 @@ const prisma = new PrismaClient();
 export async function GET(req: Request) {
     try {
         const params = req.url.split("/");
-        const id = params[params.length - 1];        
+        const id = params[params.length - 1];
 
         console.log(id);
-        
+
         const get_subject = await prisma.subject.findFirst({
             where: {
                 id: Number(id)
+            },
+            include: {
+                Exercise: {
+                    include: {
+                        Grade: true
+                    }
+                }
             }
         })
 
