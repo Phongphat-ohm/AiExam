@@ -28,7 +28,7 @@ export default function Sidebar() {
             icon: <FaBook />
         },
         {
-            href: "/dashboard/subject/exercise",
+            href: "/dashboard/exercise",
             name: "สาระการเรียนรู้",
             icon: <FaBookOpen />
         },

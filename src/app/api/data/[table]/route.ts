@@ -47,6 +47,15 @@ export async function GET(req: Request) {
                     message: "ดึงข้อมูลสำเร็จ",
                     data: subjects
                 })
+            case "exercises":
+                const exercises = await prisma.exercise.findMany({ include: { Subject: true, Grade: true, ExamSet: true }, orderBy: { id: "asc" } });
+
+                return Response.json({
+                    status: 200,
+                    message: "ดึงข้อมูลสำเร็จ",
+                    data: exercises
+                })
+
             default:
                 return Response.json({
                     status: 400,

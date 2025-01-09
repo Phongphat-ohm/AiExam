@@ -3,6 +3,7 @@ import React, { createContext, useContext, useState } from "react";
 import Loading from "./Loading";
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
+import Footer from "../Footer";
 
 interface Root {
     children?: React.ReactNode;
@@ -38,7 +39,10 @@ export default function Layout({ children }: Root) {
                 </div>
                 <div className="w-full bg-gray-200 h-screen overflow-y-scroll relative">
                     <Navbar />
-                    {children}
+                    <div className="min-h-screen">
+                        {children}
+                    </div>
+                    <Footer />
                 </div>
             </div>
         </LoadingContext.Provider>

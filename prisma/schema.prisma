@@ -62,7 +62,8 @@ model Rank {
 
 // ชุดข้อสอบ
 model ExamSet {
-  id          Int @id @unique @default(autoincrement())
+  id          Int    @id @unique @default(autoincrement())
+  name        String
   grade_id    Int
   subject_id  Int
   exercise_id Int

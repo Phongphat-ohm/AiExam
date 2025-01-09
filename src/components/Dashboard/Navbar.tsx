@@ -109,7 +109,7 @@ export default function Navbar() {
 
     return (
         <>
-            <div className="navbar absolute w-full top-0 left-0 p-0 py-3">
+            <div className="navbar absolute w-full top-0 left-0 p-0 py-3 z-30">
                 <div className="flex-1">
                     <div className="mx-5 p-3 px-6 text-xs text-gray-500 bg-white rounded-lg shadow">
                         เวลา: {time} นาฬิกา
