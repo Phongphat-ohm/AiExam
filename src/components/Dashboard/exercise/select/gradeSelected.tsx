@@ -8,9 +8,10 @@ import Swal from "sweetalert2";
 
 interface Root {
     default_value?: string
+    tooltip?: boolean;
 }
 
-export default function GradeSelect({ default_value }: Root) {
+export default function GradeSelect({ default_value, tooltip }: Root) {
     const route = useRouter();
     const [subjects, setSubjects] = useState<Grade[]>([])
 
@@ -42,9 +43,11 @@ export default function GradeSelect({ default_value }: Root) {
 
     return (
         <>
-            <Autocomplete defaultItems={subjects} defaultSelectedKey={default_value !== null ? default_value : ""} size="lg" label="เลือกระดับชั้น" placeholder="พิมพ์คำค้นหาเพื่อค้นหาระดับชั้น..." labelPlacement="outside" name="grade" id="grade" required isRequired>
-                {(item) => (<AutocompleteItem key={item.id} value={item.id}>{item.grade}</AutocompleteItem>)}
-            </Autocomplete>
+            <div className={tooltip ? "tooltip tooltip-bottom w-full" : "w-full"} data-tip="หากไม่ต้องการเปลี่ยนแปลงใส่ข้อมูลตามตารางดานล่าง">
+                <Autocomplete defaultItems={subjects} defaultSelectedKey={default_value !== null ? default_value : ""} size="lg" label="เลือกระดับชั้น" placeholder="พิมพ์คำค้นหาเพื่อค้นหาระดับชั้น..." labelPlacement="outside" name="grade" id="grade" required isRequired>
+                    {(item) => (<AutocompleteItem key={item.id} value={item.id}>{item.grade}</AutocompleteItem>)}
+                </Autocomplete>
+            </div>
         </>
     )
 }

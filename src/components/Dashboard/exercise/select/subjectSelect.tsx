@@ -7,10 +7,11 @@ import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 
 interface Root {
-    default_value?: string
+    default_value?: string;
+    tooltip?: boolean;
 }
 
-export default function SubjectSelect({ default_value }: Root) {
+export default function SubjectSelect({ default_value, tooltip }: Root) {
     const route = useRouter();
     const [subjects, setSubjects] = useState<Subject[]>([])
 
@@ -42,9 +43,11 @@ export default function SubjectSelect({ default_value }: Root) {
 
     return (
         <>
-            <Autocomplete defaultItems={subjects} defaultSelectedKey={default_value !== null ? default_value : ""} size="lg" label="เลือกวิชา" placeholder="พิมพ์คำค้นหาเพื่อค้นหาวิชา..." labelPlacement="outside" name="subject" id="subject">
-                {(item) => (<AutocompleteItem key={item.id} value={item.id}>{item.name}</AutocompleteItem>)}
-            </Autocomplete>
+            <div className={tooltip ? "tooltip tooltip-bottom w-full" : "w-full"} data-tip="หากไม่ต้องการเปลี่ยนแปลงใส่ข้อมูลตามตารางดานล่าง">
+                <Autocomplete className="w-full" isRequired required defaultItems={subjects} defaultSelectedKey={default_value !== null ? default_value : ""} size="lg" label="เลือกวิชา" placeholder="พิมพ์คำค้นหาเพื่อค้นหาวิชา..." labelPlacement="outside" name="subject" id="subject">
+                    {(item) => (<AutocompleteItem key={item.id} value={item.id}>{item.name}</AutocompleteItem>)}
+                </Autocomplete>
+            </div>
         </>
     )
 }
