@@ -23,7 +23,7 @@ export default function NewGradePage() {
                     Swal.showLoading();
                 },
                 allowOutsideClick: false
-            })
+            });
 
             const text = ev.get("text");
 
