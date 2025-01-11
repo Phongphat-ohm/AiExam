@@ -1,6 +1,6 @@
-
 import Navbar from "@/components/Navbar";
 import SignupCard from "@/components/Signup/SignupCard";
+import Background from "@/components/background";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -10,11 +10,12 @@ export const metadata: Metadata = {
 
 export default function SignInPage() {
     return (
-        <>
+        <div className="relative min-h-screen flex items-center justify-center">
+            <Background />
             <Navbar />
-            <div className="h-screen flex items-center justify-center bg-gray-200">
+            <div className="relative z-10">
                 <SignupCard />
             </div>
-        </>
-    )
+        </div>
+    );
 }

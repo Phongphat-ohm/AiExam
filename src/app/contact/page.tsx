@@ -1,52 +1,147 @@
+"use client";
+
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
+import { motion } from "framer-motion";
 
-export default function About() {
+export default function Contact() {
+  // ตัวอย่างเวลาที่มีคนมาเสนอแนะ
+  const suggestions = [
+    {
+      id: 1,
+      name: "พี่ป้าย สุดหล่อเท่",
+      message: "อะไรจะน่ารักเท่าแฟนเรา",
+    },
+    {
+      id: 2,
+      name: "พี่ออม ไงจะใครล่ะ",
+      message: "ว้าวนี่มันเจ๋งไปป่าว",
+    },
+    {
+      id: 3,
+      name: "น้องโอม กินอร่อย",
+      message: "มาม่าอร่อยมากครับผม",
+    },
+
+  ];
+
   return (
     <>
-
       <nav>
         <Navbar />
       </nav>
 
+      <div className="min-h-screen bg-gradient-to-tr from-purple-100 via-blue-100 to-green-100 flex flex-col items-center justify-center relative pt-24">
 
-      <div className="min-h-screen flex items-center justify-center bg-gray-100">
-        <div className="bg-white p-10 rounded-lg shadow-lg max-w-3xl text-center">
-          <h1 className="text-4xl font-bold text-[#464D77] mb-6">
-            เกี่ยวกับเรา
+        <div className="absolute inset-0 bg-gradient-to-bl from-indigo-200 to-pink-200 opacity-20 blur-2xl"></div>
+
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="bg-white p-10 rounded-lg shadow-lg max-w-3xl w-full z-10 mb-8"
+        >
+          <h1 className="text-4xl font-bold text-gray-800 text-center mb-6">
+            ติดต่อเรา
           </h1>
-          <p className="text-lg text-gray-700 leading-relaxed">
-            <strong>E-Xammy</strong>{" "}
-            คือแพลตฟอร์มที่พัฒนาขึ้นเพื่อสร้างประสบการณ์ใหม่ในการเรียนรู้และใช้งานเทคโนโลยีสมัยใหม่
-            ทีมงานของเราร่วมมือกันเริ่มพัฒนาเว็บไซต์นี้เมื่อวันที่{" "}
-            <strong>12 ธันวาคม พ.ศ. 2567</strong>
-            ด้วยความมุ่งมั่นและความตั้งใจแม้จะต้องเผชิญกับความท้าทายมากมายตลอดเส้นทาง
+          <p className="text-center text-gray-600 mb-8">
+            หากคุณมีคำถาม ข้อเสนอแนะ หรือปัญหาใด ๆ สามารถกรอกข้อมูลด้านล่างเพื่อติดต่อเราได้เลย!
           </p>
-          <p className="mt-4 text-lg text-gray-700">
-            ด้วยความพยายามและความสามัคคี
-            เราสามารถนำเสนอเว็บไซต์ที่ตอบโจทย์การเรียนรู้และสร้างแรงบันดาลใจให้แก่ผู้ใช้งานทุกคน
-            เราหวังว่าแพลตฟอร์มนี้จะเป็นส่วนหนึ่งของการพัฒนาความรู้และทักษะของคุณ
-          </p>
-          <div className="avatar">
-            <div className="avatar">
-              <div className="w-24 rounded-full">
-                <img src="/images/icon/smile.png" />
-              </div>
-            </div>
-            <div className="avatar">
-              <div className="w-24 rounded-full">
-                <img src="/images/icon/smile.png" />
-              </div>
-            </div>
-            <div className="avatar">
-              <div className="w-24 rounded-full">
-                <img src="/images/icon/smile.png" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
 
+
+          <form className="space-y-6">
+
+            <div>
+              <label
+                htmlFor="name"
+                className="block text-sm font-medium text-gray-700"
+              >
+                ชื่อของคุณ
+              </label>
+              <input
+                type="text"
+                id="name"
+                placeholder="ชื่อ-นามสกุล"
+                className="w-full mt-2 px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-purple-500 focus:outline-none"
+                required
+              />
+            </div>
+
+
+            <div>
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-700"
+              >
+                อีเมลของคุณ
+              </label>
+              <input
+                type="email"
+                id="email"
+                placeholder="example@email.com"
+                className="w-full mt-2 px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                required
+              />
+            </div>
+
+            <div>
+              <label
+                htmlFor="message"
+                className="block text-sm font-medium text-gray-700"
+              >
+                ข้อความ
+              </label>
+              <textarea
+                id="message"
+                rows={5}
+                placeholder="กรอกข้อความของคุณ..."
+                className="w-full mt-2 px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-green-500 focus:outline-none"
+                required
+              ></textarea>
+            </div>
+
+
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="text-center"
+            >
+              <button
+                type="submit"
+                className="w-full px-6 py-3 bg-gradient-to-r from-purple-500 to-blue-500 text-white font-bold rounded-md shadow-md hover:from-purple-600 hover:to-blue-600 focus:outline-none focus:ring-2 focus:ring-purple-400"
+              >
+                ส่งข้อความ
+              </button>
+            </motion.div>
+          </form>
+        </motion.div>
+
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+          className="bg-gray-100 p-8 rounded-lg shadow-lg max-w-4xl w-full"
+        >
+          <h2 className="text-2xl font-bold text-gray-800 mb-6">
+            ข้อเสนอแนะจากผู้ใช้งาน
+          </h2>
+          <div className="space-y-4">
+            {suggestions.map((suggestion) => (
+              <div
+                key={suggestion.id}
+                className="bg-white p-4 rounded-md shadow-sm border border-gray-200"
+              >
+                <p className="text-gray-800">
+                  <strong>{suggestion.name}</strong>:
+                </p>
+                <p className="text-gray-600 mt-1">{suggestion.message}</p>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+      </div>
 
       <Footer />
     </>
