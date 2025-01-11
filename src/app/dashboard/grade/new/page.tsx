@@ -1,32 +1,24 @@
 "use client"
 import Layout from "@/components/Dashboard/Layout";
-import { Input } from "@nextui-org/react";
+import { Input, Spinner } from "@nextui-org/react";
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 
 export default function NewGradePage() {
     const [grade, setGrade] = useState([]);
+
     useEffect(() => {
         get_grade();
     }, [])
     const router = useRouter();
 
     const create_grade = async (ev: FormData) => {
-        Swal.fire({
-            title: "กำลังสร้างระดับชั้น",
-            text: "กรุณารอ...",
-            showConfirmButton: false,
-            didOpen: () => {
-                Swal.showLoading();
-            },
-            allowOutsideClick: false
-        });
-        
         try {
-
+            toast.loading("กำลังสร้างระดับชั้น")
 
             const text = ev.get("text");
 
@@ -48,7 +40,7 @@ export default function NewGradePage() {
             const res = req.data;
 
             if (req.status !== 200) {
-                Swal.close();
+                toast.dismiss();
                 Swal.fire({
                     icon: "warning",
                     title: "ระวัง",
@@ -58,7 +50,7 @@ export default function NewGradePage() {
                 return;
             }
 
-            Swal.close();
+            toast.dismiss();
             Swal.fire({
                 icon: "success",
                 title: "สำเร็จ",
