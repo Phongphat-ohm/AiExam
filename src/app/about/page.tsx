@@ -11,16 +11,15 @@ export default function About() {
         <Navbar />
       </nav>
 
-
-      <div className="relative min-h-screen bg-gradient-to-r from-blue-100 via-purple-100 to-pink-100 flex items-center justify-center">
-        <div className="absolute w-80 h-80 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full opacity-30 blur-3xl -top-20 -left-20"></div>
-        <div className="absolute w-80 h-80 bg-gradient-to-r from-green-300 to-blue-400 rounded-full opacity-30 blur-3xl -bottom-20 -right-20"></div>
+      <div className="relative min-h-screen bg-gradient-to-r from-blue-100 via-purple-100 to-pink-100 flex items-center justify-center overflow-x-hidden">
+        <div className="absolute w-80 h-80 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full opacity-30 blur-3xl top-0 left-0"></div>
+        <div className="absolute w-80 h-80 bg-gradient-to-r from-green-300 to-blue-400 rounded-full opacity-30 blur-3xl bottom-0 right-0"></div>
 
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="bg-white p-12 rounded-2xl shadow-2xl max-w-4xl text-center space-y-8 z-10"
+          className="bg-white p-12 rounded-2xl shadow-2xl max-w-4xl text-center"
         >
           <h1 className="text-5xl font-bold text-primary mb-4">
             เกี่ยวกับเรา
