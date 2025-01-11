@@ -10,10 +10,11 @@ export default function Home() {
       </nav>
 
       <Background>
-
-          <Title/>
-
+        <div className="relative z-10">
+          <Title />
+        </div>
       </Background>
+
     </>
   );
 }

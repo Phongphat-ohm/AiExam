@@ -2,10 +2,10 @@
 
 import { Input } from "@nextui-org/react";
 import Link from "next/link";
-import GradeSelected from "./GradeSelected";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
+
 
 export default function SignupCard() {
     const route = useRouter();
@@ -14,10 +14,11 @@ export default function SignupCard() {
         Swal.fire({
             title: "กำลังสมัครสมาชิก...",
             didOpen: () => {
-                Swal.showLoading();
+                Swal.showLoading(Swal.getConfirmButton()); // ส่งปุ่มยืนยันไปแทนที่ด้วยโหลด
             },
             allowOutsideClick: false,
         });
+        
         try {
             const first_name = data.get("first_name");
             const last_name = data.get("last_name");
@@ -136,7 +137,6 @@ export default function SignupCard() {
                     labelPlacement="outside"
                     name="password"
                 />
-                <GradeSelected />
 
                 <div className="flex gap-4">
                     <Link

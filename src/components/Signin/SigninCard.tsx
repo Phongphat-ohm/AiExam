@@ -1,98 +1,89 @@
-"use client";
+"use client"
 import { Input } from "@nextui-org/react";
 import Link from "next/link";
-import Swal from "sweetalert2";
+import GradeSelected from "./GradeSelected";
 import axios from "axios";
-import { read } from "fs";
+import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
 
-export default function SigninCard() {
-    const router = useRouter();
+export default function SignupCard() {
+    const route = useRouter();
 
-    const signin = async (data: FormData) => {
+    const handler_submit = async (data: FormData) => {
         Swal.fire({
-            title: "กำลังโหลดข้อมูล",
+            title: "กำลังสมัครสมาชิก",
             didOpen: () => {
                 Swal.showLoading()
             },
             allowOutsideClick: false
         })
-
         try {
+
+            const first_name = data.get("first_name");
+            const last_name = data.get("last_name");
+            const email = data.get("email");
             const username = data.get("username");
             const password = data.get("password");
+            const grade = data.get("grade");
 
             let req_data = JSON.stringify({
+                "first_name": first_name?.toString(),
+                "last_name": last_name?.toString(),
+                "email": email?.toString(),
                 "username": username?.toString(),
-                "password": password?.toString()
+                "password": password?.toString(),
+                "grade": grade?.toString()
             });
 
             let config = {
                 method: 'post',
                 maxBodyLength: Infinity,
-                url: '/api/auth/signin',
+                url: '/api/auth/signup',
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/json'
                 },
                 data: req_data
             };
 
             const req = await axios(config);
-            const res = req.data;
+            const response = req.data;
 
-            if (res) {
+            console.log(response);
+
+            if (response.status == 200) {
                 Swal.close();
-
-                if (res.status !== 200) {
-                    Swal.fire({
-                        icon: "error",
-                        title: "ผิดพลาด",
-                        text: res.message,
-                        confirmButtonText: "ลองอีกครั้ง"
-                    })
-                    return;
-                }
-
-                if (res.role == "admin") {
-                    Swal.fire({
-                        icon: "success",
-                        title: "สำเร็จ",
-                        text: res.message,
-                        confirmButtonText: "ตกลง"
-                    }).then((r) => {
-                        if (r.isConfirmed) {
-                            router.push("/dashboard")
-                        } else {
-                            router.push("/dashboard")
-                        }
-                    })
-                    return;
-                } else {
-                    Swal.fire({
-                        icon: "success",
-                        title: "สำเร็จ",
-                        text: res.message,
-                        confirmButtonText: "ตกลง"
-                    }).then((r) => {
-                        if (r.isConfirmed) {
-                            router.push("/home")
-                        } else {
-                            router.push("/home")
-                        }
-                    })
-                    return;
-                }
+                Swal.fire({
+                    icon: "success",
+                    title: "สำเร็จ",
+                    text: response.message,
+                    confirmButtonText: "ตกลง"
+                }).then(r => {
+                    if (r.isConfirmed) {
+                        route.push("/signin");
+                    } else {
+                        route.push("/signin");
+                    }
+                })
+                return;
             }
+
+            Swal.close();
+            Swal.fire({
+                icon: "warning",
+                title: "ระวัง",
+                text: response.message,
+                confirmButtonText: "ลองอีกครั้ง"
+            })
+            return;
         } catch (error) {
+            console.log(error);
             Swal.close();
             Swal.fire({
                 icon: "error",
                 title: "ผิดพลาด",
-                text: "มีบางอย่างผิดพลาด",
+                text: "เซิร์ฟเวอร์ error",
                 confirmButtonText: "ลองอีกครั้ง"
             })
-
-            console.log(error)
             return;
         }
     }
@@ -101,24 +92,24 @@ export default function SigninCard() {
         <>
             <div className="card bg-white shadow">
                 <div className="card-body">
-                    <form action={signin} className="w-96 flex flex-col">
+                    <form action={handler_submit} className="w-96 flex flex-col">
                         <h1 className="text-5xl">
-                            เข้าสู่ระบบ
+                            สมัครสมาชิก
                         </h1>
-                        <label className="mt-2">กรอกชื่อผู้ใช้และรหัสผ่านเพื่อเข้าสู่ระบบ</label>
+                        <label className="mt-2">กรอกข้อมูลให้ครบเพื่อสมัครสมาชิกและใช้บริหารของเรา</label>
                         <div className="mt-5">
-                            <Input type="text" label="ชื่อผู้ใช้" name="username" placeholder="กรอกชื่อผู้ใช้" labelPlacement="outside" size="lg" autoComplete="off" isRequired required />
-                            <br />
-                            <div className="flex flex-col">
-                                <Input type="password" label="รหัสผ่าน" name="password" placeholder="กรอกรหัสผ่าน" labelPlacement="outside" size="lg" isRequired required />
-                                <label className="flex gap-2 mt-2">
-                                    หากลืมรหัสผ่าน <Link href={"/forgot-pass"} className="text-blue-500 underline">กดที่นี่</Link>
-                                </label>
+                            <div className="grid grid-cols-2 gap-2">
+                                <Input isRequired autoComplete="off" required placeholder="ชื่อ" size="lg" label="ชื่อ" labelPlacement="outside" name="first_name" />
+                                <Input isRequired autoComplete="off" required placeholder="นามสกุล" size="lg" label="นามสกุล" labelPlacement="outside" name="last_name" />
+                                <Input isRequired autoComplete="off" required placeholder="อีเมล" size="lg" label="อีเมล" labelPlacement="outside" name="email" />
+                                <Input isRequired autoComplete="off" required placeholder="ชื่อผู้ใช้" size="lg" label="ชื่อผู้ใช้" labelPlacement="outside" name="username" />
+                                <Input isRequired autoComplete="off" required type="password" size="lg" placeholder="รหัสผ่าน" label="รหัสผ่าน" labelPlacement="outside" className="col-span-2" name="password" />
+                                <GradeSelected />
                             </div>
                         </div>
                         <br />
                         <div className="flex gap-2">
-                            <Link href="/signup" className="btn btn-warning text-white font-normal w-1/2">สมัครสมาชิก</Link>
+                            <Link href="/signin" className="btn btn-warning text-white font-normal w-1/2">เข้าสู่ระบบ</Link>
                             <button className="btn btn-success text-white font-normal w-1/2">
                                 ยืนยัน
                             </button>

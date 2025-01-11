@@ -3,8 +3,9 @@
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import { motion } from "framer-motion";
-
+import Background from "@/components/background";
 export default function Contact() {
+  
   // ตัวอย่างเวลาที่มีคนมาเสนอแนะ
   const suggestions = [
     {
@@ -142,7 +143,6 @@ export default function Contact() {
           </div>
         </motion.div>
       </div>
-
       <Footer />
     </>
   );
