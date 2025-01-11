@@ -9,7 +9,7 @@ import Swal from "sweetalert2";
 import { ApiResponseProps, Data, Grade, Rank } from "./interface";
 import { useEffect, useState } from "react";
 import GradeSelected from "@/components/Signup/GradeSelected";
-import RankSelected from "@/components/Signup/RankSelected";
+import RankSelected from "@/components/Dashboard/User/RankSelected";
 
 export default function UpdateUser() {
     const { uid } = useParams();
