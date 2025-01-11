@@ -15,15 +15,18 @@ export default function NewGradePage() {
     const router = useRouter();
 
     const create_grade = async (ev: FormData) => {
+        Swal.fire({
+            title: "กำลังสร้างระดับชั้น",
+            text: "กรุณารอ...",
+            showConfirmButton: false,
+            didOpen: () => {
+                Swal.showLoading();
+            },
+            allowOutsideClick: false
+        });
+        
         try {
 
-            Swal.fire({
-                title: "กำลังสร้างระดับชั้น",
-                didOpen: () => {
-                    Swal.showLoading();
-                },
-                allowOutsideClick: false
-            });
 
             const text = ev.get("text");
 
