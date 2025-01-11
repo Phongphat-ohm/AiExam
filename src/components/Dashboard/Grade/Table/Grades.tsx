@@ -110,14 +110,6 @@ export default function App() {
 
     const delete_grade = async (id: string) => {
         try {
-            Swal.fire({
-                title: "กำลังดึงข้อมูลระดับชั้น",
-                didOpen: () => {
-                    Swal.showLoading()
-                },
-                allowOutsideClick: false
-            })
-
             const req_data = await axios.get("/api/data/grade/" + id)
             const res_data = req_data.data;
 
