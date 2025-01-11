@@ -158,3 +158,12 @@ model ExamResultLinkExam {
   ExamResult ExamResult @relation(fields: [exam_result_id], references: [id])
   Exam       Exam       @relation(fields: [exam_id], references: [id])
 }
+
+model UserSuggesion {
+  id        Int      @id @unique @default(autoincrement())
+  name      String
+  email     String
+  text      String
+  create_at DateTime @default(now())
+  update_at DateTime @updatedAt
+}
