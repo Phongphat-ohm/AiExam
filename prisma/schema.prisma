@@ -121,12 +121,16 @@ model Exam {
   ExamResult         ExamResult[]
   ExamResultLinkExam ExamResultLinkExam[]
   ExamSet            ExamSet              @relation(fields: [exam_set_id], references: [id])
+  ExamData           ExamData[]
 }
 
 model ExamData {
-  id   Int    @id @unique @default(autoincrement())
-  type String // text image
-  data String
+  id      Int    @id @unique @default(autoincrement())
+  exam_id Int
+  type    String // text image
+  data    String
+
+  Exam Exam @relation(fields: [exam_id], references: [id])
 }
 
 model ExamDetail {

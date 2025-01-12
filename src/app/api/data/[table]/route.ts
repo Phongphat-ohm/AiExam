@@ -32,7 +32,7 @@ export async function GET(req: Request) {
                     data: ranks_data
                 })
             case "exam-set":
-                const exam_set = await prisma.examSet.findMany({ include: { Exercise: true, Grade: true, Subject: true } });
+                const exam_set = await prisma.examSet.findMany({ include: { Exercise: true, Grade: true, Subject: true, Exam: true } });
 
                 return Response.json({
                     status: 200,
