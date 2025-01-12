@@ -4,7 +4,9 @@ import { Exercise } from "../MainContent"
 import GradeSelect from "../../select/gradeSelected"
 import SubjectSelect from "../../select/subjectSelect"
 import Link from "next/link"
-import { useEffect, useState } from "react";
+import axios from "axios";
+import Swal from "sweetalert2";
+import { useRouter } from "next/navigation";
 
 interface Root {
     exerciseName: any;
@@ -13,11 +15,100 @@ interface Root {
 }
 
 export default function MainExerciseEditCard({ exerciseName, setExerciseName, exercise }: Root) {
+    const route = useRouter();
+
+    const update_exercise = async (ev: FormData) => {
+        try {
+            Swal.fire({
+                title: "กำลังแก้ไขข้อมูล",
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            })
+
+            const id = ev.get("id");
+            const name = ev.get("name");
+            const grade = ev.get("grade");
+            const subject = ev.get("subject");
+
+            console.log(id, name, grade, subject);
+
+            let data = JSON.stringify({
+                "exercise_id": exercise?.id,
+                "exercise_name": name,
+                "grade": grade,
+                "subject": subject
+            });
+
+            let config = {
+                method: 'post',
+                maxBodyLength: Infinity,
+                url: '/api/data/exercise/update',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                data: data
+            };
+
+            const req = await axios(config);
+            const res = req.data;
+
+            if (res.status !== 200) {
+                Swal.close();
+                Swal.fire({
+                    icon: "warning",
+                    title: "ระวัง",
+                    text: res.message,
+                    confirmButtonText: "ลองอีกครั้ง"
+                }).then(r => {
+                    if (r.isConfirmed) {
+                        route.push("/dashboard/exercise");
+                    } else {
+                        route.push("/dashboard/exercise");
+                    }
+                })
+                return;
+            }
+
+            Swal.close();
+            Swal.fire({
+                icon: "success",
+                title: "สำเร็จ",
+                text: res.message,
+                confirmButtonText: "ยืนยัน"
+            }).then(r => {
+                if (r.isConfirmed) {
+                    route.push("/dashboard/exercise")
+                } else {
+                    route.push("/dashboard/exercise")
+                }
+            })
+            return;
+        } catch (error) {
+            Swal.close();
+            console.log(error);
+            Swal.fire({
+                icon: "error",
+                title: "ผิดพลาด",
+                text: "มีบางอย่างผิดพลาด",
+                confirmButtonText: "ลองอีกครั้ง"
+            }).then(r => {
+                if (r.isConfirmed) {
+                    route.push("/dashboard/exercise");
+                } else {
+                    route.push("/dashboard/exercise");
+                }
+            })
+            return;
+        }
+    }
+
     return (
         <>
             <div className="card bg-white shadow">
                 <div className="card-body">
-                    <form className="grid grid-cols-12 gap-3">
+                    <form action={update_exercise} className="grid grid-cols-12 gap-3">
                         <Input disabled label="รหัสหน่วยการเรียนรู้" placeholder="รหัสหน่วยการเรียนรู้" labelPlacement="outside" name="id" id="id" value={exercise?.id.toString()} className="col-span-3" size="lg" />
                         <Input isRequired required label="ชื่อหน่วยการเรียนรู้" placeholder="ชื่อหน่วยการเรียนรู้" labelPlacement="outside" name="name" id="name" value={exerciseName} className="col-span-3" size="lg" onChange={(e) => {
                             setExerciseName(e.target.value)

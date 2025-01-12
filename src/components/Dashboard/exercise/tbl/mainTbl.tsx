@@ -85,6 +85,64 @@ export default function ExerciseTbl() {
         get_exercise();
     }
 
+    const delete_exercise = async (data: FormData) => {
+        try {
+            const alert = await Swal.fire({
+                icon: "info",
+                title: "ต้องการลบหรือไม่",
+                showCancelButton: true,
+                confirmButtonText: "ยืนยัน",
+                cancelButtonText: "ยกเลิก"
+            })
+
+            if (alert.isConfirmed) {
+
+                Swal.fire({
+                    title: "กำลังลบข้อมูล",
+                    didOpen: () => {
+                        Swal.showLoading();
+                    },
+                    allowOutsideClick: true
+                })
+
+                const id = data.get("exercise_id");
+
+                const req = await axios.get("/api/data/exercise/delete?id=" + id);
+                const res = req.data;
+
+                if (res.status !== 200) {
+                    Swal.fire({
+                        icon: "warning",
+                        title: "ระวัง",
+                        text: res.message,
+                        confirmButtonText: "ลองอีกครั้ง"
+                    })
+                    return;
+                }
+
+                Swal.fire({
+                    icon: "success",
+                    title: "สำเร็จ",
+                    text: res.message,
+                    confirmButtonText: "ยืนยัน"
+                })
+
+                get_exercise();
+                setExercises([]);
+                setLoading(true);
+            }
+        } catch (error) {
+            console.log(error);
+            Swal.fire({
+                icon: "error",
+                title: "ผิดพลาด",
+                text: "มีบางอย่างผิดพลาด",
+                confirmButtonText: "ลองอีกครั้ง"
+            })
+            return;
+        }
+    }
+
     return (
         <div>
             <div className="mb-4 flex gap-3 items-center">
@@ -171,8 +229,8 @@ export default function ExerciseTbl() {
                                             <FaPencil />
                                         </Button>
                                     </Link>
-                                    <form action="">
-                                        <Button size="sm" isIconOnly color="danger" className="text-white">
+                                    <form action={delete_exercise}>
+                                        <Button type="submit" size="sm" isIconOnly color="danger" name="exercise_id" id="exercise_id" value={item.id} className="text-white">
                                             <FaTrash />
                                         </Button>
                                     </form>

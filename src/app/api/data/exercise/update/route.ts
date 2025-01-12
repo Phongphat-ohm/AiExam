@@ -45,8 +45,16 @@ export async function POST(req: Request) {
             },
             data: {
                 name: exercise_name,
-                grade_id: get_grade.id,
-                subject_id: get_subject.id
+                Grade: {
+                    connect: {
+                        id: get_grade.id
+                    }
+                },
+                Subject: {
+                    connect: {
+                        id: get_subject.id
+                    }
+                }
             }
         })
 
