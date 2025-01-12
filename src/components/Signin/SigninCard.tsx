@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import { read } from "fs";
 import { useRouter } from "next/navigation";
+import { FaLine } from "react-icons/fa6";
 
 export default function SigninCard() {
     const router = useRouter();
@@ -116,12 +117,21 @@ export default function SigninCard() {
                                 </label>
                             </div>
                         </div>
-                        <br />
-                        <div className="flex gap-2">
-                            <Link href="/signup" className="btn btn-warning text-white font-normal w-1/2">สมัครสมาชิก</Link>
-                            <button className="btn btn-success text-white font-normal w-1/2">
-                                ยืนยัน
+                        {/* <div className="my-3">
+                            <button className="btn btn-success text-white font-normal flex items-center justify-center gap-3 w-full">
+                                <FaLine /> เข้าสู่ระบบด้วย Line
                             </button>
+                        </div> */}
+                        <br />
+                        <div className="flex gap-2 items-center justify-between">
+                            <div className="w-full">
+                                <Link href="/signup" className="btn btn-warning text-white font-normal w-full">สมัครสมาชิก</Link>
+                            </div>
+                            <div className="w-full">
+                                <button className="btn btn-success text-white font-normal w-full">
+                                    ยืนยัน
+                                </button>
+                            </div>
                         </div>
                     </form>
                 </div>
