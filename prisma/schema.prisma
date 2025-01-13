@@ -33,6 +33,7 @@ model User {
   Rank       Rank?        @relation(fields: [rankId], references: [id])
   rankId     Int?
   ExamResult ExamResult[]
+  LineLogin  LineLogin?
 }
 
 // ระดับชั้น
@@ -170,4 +171,14 @@ model UserSuggesion {
   text      String
   create_at DateTime @default(now())
   update_at DateTime @updatedAt
+}
+
+model LineLogin {
+  id          Int    @id @unique @default(autoincrement())
+  user_id     Int    @unique
+  line_sub_id String @unique
+
+  connect_at DateTime
+
+  User User @relation(fields: [user_id], references: [id])
 }
