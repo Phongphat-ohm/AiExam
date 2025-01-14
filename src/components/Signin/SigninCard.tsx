@@ -1,13 +1,15 @@
 "use client";
-import { Input } from "@nextui-org/react";
+import { Input, Spinner } from "@nextui-org/react";
 import Link from "next/link";
 import Swal from "sweetalert2";
 import axios from "axios";
 import { read } from "fs";
 import { useRouter } from "next/navigation";
 import { FaLine } from "react-icons/fa6";
+import { useState } from "react";
 
 export default function SigninCard() {
+    const [lineLoading, setLineLoading] = useState(false);
     const router = useRouter();
 
     const signin = async (data: FormData) => {
@@ -98,6 +100,52 @@ export default function SigninCard() {
         }
     }
 
+    const line_login = async () => {
+        try {
+            setLineLoading(true);
+            Swal.fire({
+                title: "กำลังพาคุณไปยังหน้าต่อไป",
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            })
+
+            let config = {
+                method: 'post',
+                maxBodyLength: Infinity,
+                url: '/api/auth/line/generate-url',
+                headers: {
+                    'Cookie': 'line_state=AIYZ9ZPOJ1'
+                }
+            };
+
+            const get_url = await axios(config);
+            const response_url = get_url.data;
+
+            if (response_url.status !== 200) {
+                setLineLoading(false);
+                Swal.fire({
+                    icon: "warning",
+                    title: "ระวัง",
+                    text: response_url.message
+                })
+                return;
+            }
+
+            router.push(response_url.url);
+        } catch (error) {
+            console.log(error);
+            Swal.close();
+            Swal.fire({
+                icon: "error",
+                title: "ผิดลาด",
+                text: "มีบางอย่างผิดพลาด",
+                confirmButtonText: "ลองอีกครั้ง"
+            })
+        }
+    }
+
     return (
         <>
             <div className="card bg-white shadow">
@@ -117,9 +165,15 @@ export default function SigninCard() {
                                 </label>
                             </div>
                         </div>
-                        {/* <div className="my-3">
-                            <button className="btn btn-success text-white font-normal flex items-center justify-center gap-3 w-full">
-                                <FaLine /> เข้าสู่ระบบด้วย Line
+                        {/* <div className="mt-3">
+                            <button className="btn btn-success text-white font-normal flex items-center justify-center gap-3 w-full" onClick={line_login} disabled={lineLoading}>
+                                {lineLoading ? (
+                                    <Spinner color="white" />
+                                ) : (
+                                    <>
+                                        <FaLine /> เข้าสู่ระบบด้วย Line
+                                    </>
+                                )}
                             </button>
                         </div> */}
                         <br />
@@ -134,8 +188,8 @@ export default function SigninCard() {
                             </div>
                         </div>
                     </form>
-                </div>
-            </div>
+                </div >
+            </div >
         </>
     )
 }

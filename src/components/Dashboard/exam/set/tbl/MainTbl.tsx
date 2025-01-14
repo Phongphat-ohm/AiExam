@@ -96,6 +96,68 @@ export default function MainTable() {
         }
     };
 
+    const delete_exam_set = async (ev: FormData) => {
+        try {
+            const confirm_alert = await Swal.fire({
+                icon: "info",
+                title: "ต้องการลบหรือไม่",
+                text: "คุณต้องแน่ใจก่อนว่าลบข้อสอบทั้งหมดที่เชื่อมกับชุดข้อสอบนี้แล้ว",
+                showCancelButton: true,
+                confirmButtonText: "ยืนยัน",
+                cancelButtonText: "ยกเลิก"
+            })
+
+            if (!confirm_alert.isConfirmed) {
+                return;
+            }
+
+            Swal.fire({
+                title: "กำลังลบข้อมูลชุดข้อสอบ",
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            })
+
+            const request = await axios.get("/api/data/exam/set/delete?set_id=" + ev.get("exam_set_id"));
+            const response = request.data;
+
+            if (response.status !== 200) {
+                Swal.close();
+                Swal.fire({
+                    icon: "warning",
+                    title: "ระวัง",
+                    text: response.message,
+                    confirmButtonText: "ลองอีกครั้ง"
+                })
+            }
+
+            Swal.close();
+            Swal.fire({
+                icon: "success",
+                title: "สำเร็จ",
+                text: response.message,
+                confirmButtonText: "ยืนยัน"
+            }).then(r => {
+                if (r.isConfirmed) {
+                    get_exam_set()
+                } else {
+                    get_exam_set()
+                }
+            })
+            return;
+        } catch (error) {
+            console.log(error);
+            Swal.close();
+            Swal.fire({
+                icon: "error",
+                title: "ผิดพลาด",
+                text: "มีบางอย่างผิดพลาด",
+                confirmButtonText: "ลองอีกครั้ง"
+            })
+        }
+    }
+
     return (
         <div>
             <div className="py-5 flex items-center gap-3">
@@ -183,14 +245,14 @@ export default function MainTable() {
                                             <FaPencil />
                                         </Button>
                                     </Link>
-                                    <form>
+                                    <form action={delete_exam_set}>
                                         <Button
                                             type="submit"
                                             size="sm"
                                             isIconOnly
                                             color="danger"
-                                            name="exercise_id"
-                                            id="exercise_id"
+                                            name="exam_set_id"
+                                            id="exam_set_id"
                                             value={item.id}
                                             className="text-white"
                                         >
