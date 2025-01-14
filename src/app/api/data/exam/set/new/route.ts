@@ -42,21 +42,7 @@ export async function POST(req: Request) {
 
         const get_exercise = await prisma.exercise.findFirst({
             where: {
-                AND: [
-                    {
-                        Grade: {
-                            grade
-                        }
-                    },
-                    {
-                        Subject: {
-                            name: subject
-                        }
-                    },
-                    {
-                        name: exercise
-                    }
-                ]
+                name: exercise
             }
         })
 
