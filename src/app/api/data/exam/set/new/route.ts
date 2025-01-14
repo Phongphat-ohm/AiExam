@@ -58,7 +58,7 @@ export async function POST(req: Request) {
                 name: set_name,
                 grade_id: Number(get_grade.id),
                 subject_id: Number(get_subject.id),
-                exercise_id: Number(get_subject.id)
+                exercise_id: Number(get_exercise.id)
             }
         })
 
