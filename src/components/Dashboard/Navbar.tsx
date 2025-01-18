@@ -6,6 +6,8 @@ import { useState, useEffect } from "react";
 import { FaGear } from "react-icons/fa6";
 import Swal from "sweetalert2";
 import { useLoading } from "./Layout";
+import { IoIosReturnLeft, IoIosReturnRight } from "react-icons/io";
+
 
 interface UserData {
     gravatar: string;
@@ -111,8 +113,16 @@ export default function Navbar() {
         <>
             <div className="navbar absolute w-full top-0 left-0 p-0 py-3 z-30">
                 <div className="flex-1">
-                    <div className="mx-5 p-3 px-6 text-xs text-gray-500 bg-white rounded-lg shadow">
-                        เวลา: {time} นาฬิกา
+                    <div className="flex gap-2 items-center mx-5">
+                        <button onClick={() => route.back()} className="p-3  rounded-lg bg-info text-white font-bold">
+                            <IoIosReturnLeft />
+                        </button>
+                        <button onClick={() => route.forward()} className="p-3  rounded-lg bg-info text-white font-bold">
+                            <IoIosReturnRight />
+                        </button>
+                        <div className="p-3 px-6 text-xs text-gray-500 bg-white rounded-lg shadow">
+                            เวลา: {time} นาฬิกา
+                        </div>
                     </div>
                 </div>
                 <div className="flex-none">

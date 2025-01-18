@@ -8,10 +8,12 @@ import Swal from "sweetalert2";
 
 interface Root {
     subject_id: string;
-    grade_id: string
+    grade_id: string;
+    default_value?: string;
+    tooltip?: boolean;
 }
 
-export default function ExerciseSelect({ subject_id, grade_id }: Root) {
+export default function ExerciseSelect({ subject_id, grade_id, default_value, tooltip }: Root) {
     const [exercise, setExercise] = useState<Exercise[]>([]);
 
     useEffect(() => {
@@ -52,13 +54,15 @@ export default function ExerciseSelect({ subject_id, grade_id }: Root) {
 
     return (
         <>
-            <Autocomplete defaultItems={exercise} size="lg" isDisabled={exercise.length <= 0} disabled={exercise.length <= 0} label="หน่วยการเรียนรู้" labelPlacement="outside" name="exercise" id="exercise" placeholder="หน่วยการเรียนรู้" className="w-full">
-                {(item) => (
-                    <AutocompleteItem value={item.id}>
-                        {item.name}
-                    </AutocompleteItem>
-                )}
-            </Autocomplete>
+            <div className={tooltip ? "tooltip tooltip-bottom w-full" : "w-full"} data-tip="หากไม่ต้องการเปลี่ยนแปลงใส่ข้อมูลตามตารางดานล่าง">
+                <Autocomplete defaultSelectedKey={default_value} defaultItems={exercise} size="lg" isDisabled={exercise.length <= 0} disabled={exercise.length <= 0} label="หน่วยการเรียนรู้" labelPlacement="outside" name="exercise" id="exercise" placeholder="หน่วยการเรียนรู้" className="w-full">
+                    {(item) => (
+                        <AutocompleteItem value={item.id}>
+                            {item.name}
+                        </AutocompleteItem>
+                    )}
+                </Autocomplete>
+            </div>
         </>
     )
 }

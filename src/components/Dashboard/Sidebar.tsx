@@ -33,14 +33,14 @@ export default function Sidebar() {
             icon: <FaBookOpen />
         },
         {
+            href: "/dashboard/exam",
+            name: "รายงานข้อสอบ",
+            icon: <FaClipboardCheck />
+        },
+        {
             href: "/dashboard/exam/set",
             name: "ชุดข้อสอบ",
             icon: <FaClipboard />
-        },
-        {
-            href: "/dashboard/exam",
-            name: "ข้อสอบ",
-            icon: <FaClipboardCheck />
         },
         {
             href: "/dashboard/rank",
